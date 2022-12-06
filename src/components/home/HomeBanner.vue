@@ -8,7 +8,6 @@
                 <p class="lead">Please sign up or log in!</p>
             </div>
 
-
             <div v-else-if="jwt !== undefined && jwt !== '' && this.user.roles === 'User'">
                 <h1 class="display-3">Hello there, {{user.firstName}} {{user.lastName}}</h1>
                 <p class="lead">Nice to see you visiting our Banking application!</p>

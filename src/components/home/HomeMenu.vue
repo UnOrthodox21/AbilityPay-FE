@@ -39,7 +39,7 @@
     </div>
 
 
-    <div v-else>
+    <div v-if="jwt !== undefined || jwt !== ''">
         <div class="container" id="home-menu">
             <div class="row">
                 <div class="col-6 text-left mt-3 mb-3 pt-2">
@@ -53,13 +53,11 @@
                                 <li><b>Phone:</b> {{ user.phone }}</li>
                                 <li><b>E-mail:</b> {{ user.email }}</li>
                             </ul>
-
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <router-link class="btn btn-user" to="/settings">User Settings</router-link>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -67,7 +65,6 @@
                 <div class="col-6 text-left mt-3 mb-3 pt-2">
                     <div class="card">
                         <div class="card-body">
-
                             <div class="row">
                                 <div class="col-6">
                                     <h2 class="mb-4 home-menu-title">Bank Accounts:</h2>

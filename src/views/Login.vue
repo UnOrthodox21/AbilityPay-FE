@@ -34,7 +34,6 @@
     methods: {
       authenticate(e) {
         e.preventDefault();
-
         const loginUser = {
           username: this.username,
           password: this.password
@@ -50,9 +49,7 @@
             }
           }).catch(err => console.log(err));
       },
-
     }
-
   }
 </script>
 
