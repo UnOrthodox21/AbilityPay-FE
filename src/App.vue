@@ -1,10 +1,10 @@
 <template>
-<div class="content">
-  <Header/>
-  <Sidebar/>
-  <router-view/>
+  <div class="content">
+    <Header/>
+    <Sidebar/>
+    <router-view/>
   </div>
-  <Footer/>
+ <Footer/>
 </template>
 
 <script>
