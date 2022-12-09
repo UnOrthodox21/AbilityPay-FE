@@ -26,9 +26,6 @@
 <script>
     export default {
         name: "HomeBanner",
-        components: {
-
-        },
         props: ["user", "jwt"]
     }
 </script>

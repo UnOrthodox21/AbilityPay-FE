@@ -17,6 +17,21 @@ const routes = [
     name: 'Register',
     component:() => import( '../views/Register.vue')
   },
+  {
+    path: '/transactions',
+    name: 'Transactions',
+    component: () => import('../views/Transactions.vue')
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import( '../views/Settings.vue')
+  },
+  {
+    path: '/bank-accounts',
+    name: 'BankAccounts',
+    component: () => import( '../views/BankAccounts.vue')
+  }
 ]
 
 const router = createRouter({
