@@ -6,7 +6,7 @@
                 <div class="col-6 text-left mt-3 mb-3 pt-2">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="mb-4 login-register-title text-center mt-4 py-1">Login:</h2>
+                            <h2 class="mb-4 login-register-title text-center mt-4 py-1">Returning Users:</h2>
 
                             <div class="row">
                                 <div class="col-12 text-center">
@@ -22,7 +22,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <h2 class="mb-4 login-register-title text-center mt-4 py-1">Register:</h2>
+                                    <h2 class="mb-4 login-register-title text-center mt-4 py-1">New Users:</h2>
                                 </div>
                             </div>
 

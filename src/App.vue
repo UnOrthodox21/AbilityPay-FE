@@ -165,7 +165,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: rgb(248, 248, 248);
-    background-image: url("assets/21.jpeg");
+    background-image: url("assets/images/background.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
