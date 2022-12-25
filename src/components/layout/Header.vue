@@ -3,8 +3,10 @@
   <div class="pos-f-t">
     <div class="collapse" id="navbarToggleExternalContent">
       <div class="bg-dark p-4">
-        <h4 class="text-white">Collapsed content</h4>
-        <span class="text-muted">Toggleable via the navbar brand.</span>
+        <h4 class="text-white">Accessibility Settings menu</h4>
+        <span class="text-white">Settings go here.</span>
+        <label for="customRange2">Example range</label>
+        <input type="range" class="custom-range" min="0" max="5" id="customRange2">
       </div>
     </div>
 

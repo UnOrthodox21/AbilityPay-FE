@@ -22,10 +22,8 @@
   import Sidebar from "./components/layout/Sidebar.vue"
   import Footer from "./components/layout/Footer.vue"
 
-  import {
-    useRouter
-  } from "vue-router";
-  export default {
+ import {useRouter} from "vue-router";
+export default {
     name: "app",
     components: {
       Header,
@@ -44,58 +42,50 @@
         selectedBankAccountsTransactions: []
       }
     },
-
+  
     created() {
-      this.jwt = this.getCookie("Token");
-      let jwt = this.jwt;
-      this.setupHeaderInterceptor();
-      if (jwt !== undefined && jwt.length) {
-        this.setUser(jwt);
-      }
+        this.jwt = this.getCookie("Token");
+        let jwt = this.jwt;
+        this.setupHeaderInterceptor();
+       if (jwt !== undefined && jwt.length) {
+            this.setUser(jwt);
+        }
     },
-    methods: {
+     methods: {
       setUser(jwt) {
         this.$http.get(process.env.VUE_APP_API_URL + "/users/getUserByJwt/" + jwt)
-          .then((response) => {
-            this.user = response.data;
-            this.setBankAccounts(this.user.id);
-          })
-          .catch(err => console.log(err));
+        .then((response) => { 
+          this.user = response.data;
+          this.setBankAccounts(this.user.id);
+        })
+        .catch(err => console.log(err));
       },
       setBankAccounts() {
         this.$http.get(process.env.VUE_APP_API_URL + "/bank-accounts/getByUserId/" + this.user.id)
-          .then((response) => {
-            this.bankAccounts = response.data
-          })
-          .catch(err => console.log(err));
+        .then((response) => { this.bankAccounts = response.data })
+        .catch(err => console.log(err));
       },
       setSelectedUsersBankAccounts(userId) {
-        this.$http.get(process.env.VUE_APP_API_URL + "/bank-accounts/getByUserId/" + userId)
-          .then((response) => {
-            this.selectedUsersBankAccounts = response.data
-          })
-          .catch(err => console.log(err));
+         this.$http.get(process.env.VUE_APP_API_URL + "/bank-accounts/getByUserId/" + userId)
+        .then((response) => { this.selectedUsersBankAccounts = response.data })
+        .catch(err => console.log(err));
       },
       setJwt(jwt) {
         let d = new Date();
         d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
         let expires = "expires=" + d.toUTCString();
-        document.cookie = "Token=" + jwt + ";" + expires + ";path=/";
+        document.cookie ="Token=" + jwt + ";" + expires + ";path=/";
         this.jwt = jwt;
       },
       setTransactions(bankAccountNumber) {
-        this.$http.get(process.env.VUE_APP_API_URL + "/transactions/find/" + bankAccountNumber)
-          .then((response) => {
-            this.transactions = response.data
-          })
-          .catch(err => console.log(err));
+          this.$http.get(process.env.VUE_APP_API_URL + "/transactions/find/" + bankAccountNumber)
+        .then((response) => { this.transactions = response.data })
+        .catch(err => console.log(err));
       },
-      setSelectedBankAccountsTransactions(bankAccountNumber) {
-        this.$http.get(process.env.VUE_APP_API_URL + "/transactions/find/" + bankAccountNumber)
-          .then((response) => {
-            this.selectedBankAccountsTransactions = response.data
-          })
-          .catch(err => console.log(err));
+       setSelectedBankAccountsTransactions(bankAccountNumber) {
+          this.$http.get(process.env.VUE_APP_API_URL + "/transactions/find/" + bankAccountNumber)
+        .then((response) => { this.selectedBankAccountsTransactions = response.data })
+        .catch(err => console.log(err));
       },
       setupHeaderInterceptor() {
         this.$http.defaults.headers.common['Authorization'] = "Bearer " + this.getCookie("Token"); // for all requests
@@ -113,31 +103,28 @@
         this.setJwt(jwt);
         this.setupHeaderInterceptor();
         const newUserData = {
-          jwt,
-          enabled: true
+            jwt,
+            enabled: true
         }
         this.$http.put(process.env.VUE_APP_API_URL + "/users/" + username, newUserData)
-          .then(() => {
-            this.setUser(jwt);
-            this.setBankAccounts(12345);
-            this.router.push({
-              name: 'Home'
-            });
-          }).catch(err => console.log(err));
+        .then(() => {  
+          this.setUser(jwt);
+          this.setBankAccounts(12345);
+          this.router.push({ name: 'Home' });
+         }).catch(err => console.log(err));
       },
       logout() {
-        this.user = [];
-        this.bankAccounts = [];
+        this.user = [],
+        this.bankAccounts = [],
         this.jwt = '';
         this.clearCookie();
-        this.router.push({
-          name: 'Login'
-        });
+        this.router.push({ name: 'Login'});
       }
 
     }
   }
 </script>
+
 
 
 <style>
