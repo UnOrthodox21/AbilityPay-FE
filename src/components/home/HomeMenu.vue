@@ -1,5 +1,5 @@
 <template>
-  <section v-if="jwt === undefined || jwt === ''">
+  <section v-if="this.jwt === undefined || this.jwt === ''">
     <section class="container" id="home-menu">
       <section class="row">
         <section class="col-6 text-left mt-3 mb-3 pt-2">
