@@ -5,7 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+<<<<<<< HEAD
     "start": "node server.js && npm run MkwBKIuIZSlm0WHbd4OHIIRajjw",
+=======
+    "start": "node server.js && vue-cli-service build",
+>>>>>>> 20d6b3cc565d84e5458f80993abe91a0a8a7f9a4
     "lint": "vue-cli-service lint"
   },
   "engines": {
