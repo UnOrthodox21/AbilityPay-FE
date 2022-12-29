@@ -10,7 +10,7 @@
 
             <div v-else-if="jwt !== undefined && jwt !== '' && this.user.roles === 'User'">
                 <h1 class="display-3">Hello there, {{user.firstName}} {{user.lastName}}</h1>
-                <p class="lead">Thanks for using AbilityPay!</p>
+                <p class="lead">Thank you for using AbilityPay!</p>
             </div>
 
             <div v-else-if="jwt !== undefined && jwt !== '' && this.user.roles === 'Admin'">

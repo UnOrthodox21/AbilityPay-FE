@@ -85,7 +85,7 @@ export default {
         let jwt = this.jwt;
         this.setupHeaderInterceptor();
        if (jwt !== undefined && jwt.length) {
-            this.setUser(jwt);
+           this.setUser(jwt);
         }
     },
      methods: {
@@ -93,7 +93,9 @@ export default {
         this.$http.get(process.env.VUE_APP_API_URL + "/users/getUserByJwt/" + jwt)
         .then((response) => { 
           this.user = response.data;
-          this.setBankAccounts(this.user.id);
+          if (this.user !== []) {
+              this.setBankAccounts();
+          } 
         })
         .catch(err => console.log(err));
       },
@@ -135,7 +137,7 @@ export default {
       clearCookie() {
         document.cookie = "Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       },
-      login(username, jwt) {
+        login(username, jwt) {
         // Add a request intercepto
         this.setJwt(jwt);
         this.setupHeaderInterceptor();
@@ -145,9 +147,10 @@ export default {
         }
         this.$http.put(process.env.VUE_APP_API_URL + "/users/" + username, newUserData)
         .then(() => {  
-          this.setUser(jwt);
-          this.setBankAccounts(12345);
-          this.router.push({ name: 'Home' });
+            this.setUser(jwt);
+            if (this.users !== [] && this.bankAccounts !== []) {
+              this.router.push({ name: 'Home' });
+            }
          }).catch(err => console.log(err));
       },
       logout() {
