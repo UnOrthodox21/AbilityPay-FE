@@ -1,11 +1,11 @@
 <template>
-    <div class="container-fluid footer text-center py-5" id="footer-container">
-        <div class="row">
-            <div class="col-12">
+    <footer class="container-fluid footer text-center py-5" id="footer-container">
+        <section class="row">
+            <article class="col-12">
                 <p>©2022 Rihards Edmunds Cērps</p>
-            </div>
-        </div>
-    </div>
+            </article>
+        </section>
+    </footer>
 </template>
 
 

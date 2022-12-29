@@ -4,18 +4,18 @@
         <div class="container">
 
             <div v-if="jwt == undefined || jwt == ''">
-                <h1 class="display-3">Welcome to our banking app.</h1>
-                <p class="lead">Please sign up or log in!</p>
+                <h1 class="display-3">Welcome to AbilityPay.</h1>
+                <p class="lead">Please log in or sign up!</p>
             </div>
 
             <div v-else-if="jwt !== undefined && jwt !== '' && this.user.roles === 'User'">
                 <h1 class="display-3">Hello there, {{user.firstName}} {{user.lastName}}</h1>
-                <p class="lead">Nice to see you visiting our Banking application!</p>
+                <p class="lead">Thanks for using AbilityPay!</p>
             </div>
 
             <div v-else-if="jwt !== undefined && jwt !== '' && this.user.roles === 'Admin'">
                 <h1 class="display-3">Hello there, {{user.firstName}} {{user.lastName}}</h1>
-                <p class="lead">Nice to see you administrating our application!</p>
+                <p class="lead">Nice to see you administrating AbilityPay!</p>
             </div>
 
 
@@ -33,6 +33,10 @@
 <style scoped>
     .jumbotron {
         background: none;
+    }
+
+    .display-3 {
+        font-size: 5em;
     }
 
     .lead {

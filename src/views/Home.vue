@@ -1,6 +1,8 @@
 <template>
   <HomeBanner v-bind:user="user" v-bind:jwt="jwt" />
-  <HomeMenu v-bind:user="user" v-bind:bankAccounts="bankAccounts" v-bind:jwt="jwt" />
+  <HomeMenu v-bind:user="user" v-bind:bankAccounts="bankAccounts" v-bind:jwt="jwt" 
+   v-bind:colorBlindnessOptimization="colorBlindnessOptimization"
+   v-bind:keyboardNavigationOptimization="keyboardNavigationOptimization" />
 </template>
 
 <script>
@@ -13,7 +15,7 @@
       HomeBanner,
       HomeMenu
     },
-    props: ["user", "bankAccounts", "jwt"]
+    props: ["user", "bankAccounts", "jwt", "colorBlindnessOptimization", "keyboardNavigationOptimization"]
   }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-<button @click="createNewBankAccount()" class="btn btn-top-menu">Create a new account</button>
-<router-link to="/transactions"  class="btn btn-top-menu">Send money</router-link>
+<button @click="createNewBankAccount()" class="btn btn-top-menu mr-2">Create a new account</button>
+<router-link to="/transactions"  class="btn btn-top-menu ml-2">Send money</router-link>
 
    <table class="table my-5 mx-auto">
   <thead>
@@ -122,9 +122,9 @@ export default {
 
 <style scoped>
     .btn-top-menu{
-        border-color: rgb(248, 248, 248);
-        color: rgb(248, 248, 248);
-        font-size: 1.2em;
+        color: rgb(250, 250, 248);
+        background-color: #414b55;
+        font-size: 1.4em;
         padding: 1em;
         height: 3.5em;
         width: 12em;
@@ -134,7 +134,11 @@ export default {
     }
 
     .btn-top-menu:hover {
-          background-color: rgba(46, 46, 46, 0.884);
+          background-color: #2a2e32;
+    }
+
+      .btn-top-menu:focus {
+          background-color: #2a2e32;
     }
 
     .table {

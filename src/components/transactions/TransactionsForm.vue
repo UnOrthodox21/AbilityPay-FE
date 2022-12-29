@@ -37,7 +37,7 @@
   </div>
   <div class="form-group row mt-5 mb-0">
     <div class="col-12">
-  <button type="submit" class="btn btn-transaction">Submit</button>
+  <button type="submit" class="btn btn-transactions">Submit</button>
 
 
   <div class="alert mt-5" id="transaction-alert" style="display: none;" role="alert"></div>
@@ -128,7 +128,7 @@ export default {
 </script>
 
 <style scoped>
-    .btn-transaction {
+    .btn-transactions {
         padding: 1em;
         height: 3.5em;
         width: 25em;
