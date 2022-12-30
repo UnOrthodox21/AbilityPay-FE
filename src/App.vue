@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-bind:class="compBodyClasses">
     <Header v-bind:user="user" v-bind:jwt="jwt" />
     <main class="container-fluid" v-bind:class="compFontClasses">
       <section class="row">
@@ -56,6 +56,9 @@ export default {
         fontWeight600: true,
         fontWeight800: false,
         colorBlindnessOptimization: "true",
+        colorBlindnessOptimizationDeuteranopia: true,
+        colorBlindnessOptimizationPolinopia: false,
+        colorBlindnessOptimizationTritanopia: false,
         keyboardNavigationOptimization: "true"
       }
     },
@@ -78,8 +81,15 @@ export default {
           fontWeight800: this.fontWeight800
         }
       },
+        compBodyClasses() {
+          return {
+            colorBlindnessOptimizationDeuteranopia: this.colorBlindnessOptimizationDeuteranopia,
+            colorBlindnessOptimizationPolinopia: this.colorBlindnessOptimizationPolinopia,
+            colorBlindnessOptimizationTritanopia: this.colorBlindnessOptimizationTritanopia
+          }
+      },      
     },
-  
+
     created() {
         this.jwt = this.getCookie("Token");
         let jwt = this.jwt;
@@ -93,10 +103,8 @@ export default {
         this.$http.get(process.env.VUE_APP_API_URL + "/users/getUserByJwt/" + jwt)
         .then((response) => { 
           this.user = response.data;
-          if (this.user !== []) {
-              this.setBankAccounts();
-          } 
-        })
+          this.setBankAccounts();
+          })
         .catch(err => console.log(err));
       },
       setBankAccounts() {
@@ -138,7 +146,7 @@ export default {
         document.cookie = "Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       },
         login(username, jwt) {
-        // Add a request intercepto
+        // Add a request interceptor
         this.setJwt(jwt);
         this.setupHeaderInterceptor();
         const newUserData = {
@@ -148,9 +156,10 @@ export default {
         this.$http.put(process.env.VUE_APP_API_URL + "/users/" + username, newUserData)
         .then(() => {  
             this.setUser(jwt);
-            if (this.users !== [] && this.bankAccounts !== []) {
-              this.router.push({ name: 'Home' });
-            }
+            
+          if (this.user !== [] && this.bankAccounts !== [] && this.jwt !== undefined && this.jwt.length) {
+             this.router.push({ name: 'Home' });
+          }
          }).catch(err => console.log(err));
       },
       logout() {
@@ -159,6 +168,7 @@ export default {
         this.jwt = '';
         this.clearCookie();
         this.router.push({ name: 'Login'});
+        
       },
       setFontFamily(fontFamily) {
         if (fontFamily == "segoeUi") { this.fontFamilySegoeUi = true; } else { this.fontFamilySegoeUi = false; }   
@@ -180,8 +190,30 @@ export default {
         if (fontWeight == "600") { this.fontWeight600 = true; } else { this.fontWeight600 = false; }
         if (fontWeight == "800") { this.fontWeight800 = true; } else { this.fontWeight800 = false; }
       },
-      setColorBlindnessOptimization(colorBlindnessOptimization) {
-        this.colorBlindnessOptimization = colorBlindnessOptimization;
+      setColorBlindnessOptimization(colorBlindnessOptimization) { 
+        if (colorBlindnessOptimization == "disabled") {
+          this.colorBlindnessOptimization = "false";
+        } else {
+          this.colorBlindnessOptimization = "true";
+        }
+   
+        if (colorBlindnessOptimization == "deuterenopia") { 
+            this.colorBlindnessOptimizationDeuteranopia = true; 
+          } else { 
+            this.colorBlindnessOptimizationDeuteranopia = false; 
+          }
+
+        if (colorBlindnessOptimization == "protanopia") { 
+            this.colorBlindnessOptimizationProtanopia = true; 
+          } else { 
+            this.colorBlindnessOptimizationProtanopia = false; 
+          }
+
+        if (colorBlindnessOptimization == "tritanopia") { 
+            this.colorBlindnessOptimizationTritanopia = true; 
+          } else { 
+            this.colorBlindnessOptimizationTritanopia = false; 
+          }
       },
        setKeyboardNavigationOptimization(keyboardNavigationOptimization) {
         this.keyboardNavigationOptimization = keyboardNavigationOptimization;
@@ -253,7 +285,7 @@ export default {
   }
 
   .btn-login {
-    color: rgb(248, 248, 248);
+    color: rgb(250, 250, 250);
     font-size: 1.2em;
     padding: 1em;
     height: 3.5em;
@@ -261,12 +293,17 @@ export default {
     text-align: center;
     vertical-align: bottom;
     margin-top: 3.85em;
-    background-color: rgb(25, 25, 25);
+    background-color: #414b55;
   }
 
   .btn-login:hover {
-    color: rgb(248, 248, 248);
-    background-color: rgb(32, 32, 34);
+     color: rgb(250, 250, 250);
+     background-color: #2a2e32;
+  }
+
+   .btn-login:focus {
+     color: rgb(250, 250, 250);
+     background-color: #2a2e32;
   }
 
  .fontFamilySegoeUi {
@@ -319,6 +356,19 @@ export default {
 
   .fontWeight800 * {
     font-weight: 800 !important;
+  }
+
+
+  .colorBlindnessDeuteranopia {
+    background-image: url("assets/images/background 4.jpeg") !important;
+  }
+
+  .colorBlindnessProtanopia {
+    background-image: url("assets/images/background 2.jpeg") !important;
+  }
+
+  .colorBlindnessTritanopia {
+    background-image: url("assets/images/background 1.jpeg") !important;
   }
 
   @media screen and (min-width:1200px) {

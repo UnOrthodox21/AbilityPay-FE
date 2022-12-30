@@ -1,6 +1,6 @@
 <template>
 <TransactionsBanner/>
-<TransactionsForm v-bind:bankAccounts="bankAccounts"/>
+<TransactionsForm v-bind:bankAccounts="bankAccounts" v-bind:colorBlindnessOptimization="colorBlindnessOptimization"/>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
     TransactionsBanner,
     TransactionsForm
   },
-  props: ["user", "bankAccounts"]
+  props: ["user", "bankAccounts", "colorBlindnessOptimization"]
 }
 </script>
 

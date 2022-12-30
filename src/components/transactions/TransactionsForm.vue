@@ -35,9 +35,13 @@
     <input type="text" class="form-control mb-2" id="descriptionInput" v-model="description" name="description" placeholder="Enter description" required>
   </div>
   </div>
+
+
   <div class="form-group row mt-5 mb-0">
     <div class="col-12">
-  <button type="submit" class="btn btn-transactions">Submit</button>
+  <button type="submit" class="btn btn-transactions" 
+  v-class="{ 'btn-transactions-color': colorBlindnessOptimization == 'false' }" 
+  id="submitButton">Submit</button>
 
 
   <div class="alert mt-5" id="transaction-alert" style="display: none;" role="alert"></div>
@@ -72,7 +76,7 @@ export default {
         description: ''
       }
     },
-    props: ["bankAccounts"],
+    props: ["bankAccounts", "colorBlindnessOptimization"],
     methods: {
 
     setUserBankAccount() {
@@ -134,9 +138,23 @@ export default {
         width: 25em;
         text-align: center;
         vertical-align: center;
-        box-shadow: 7px 7px 5px rgb(59, 50, 50);
-
     }
+
+    .btn-transactions-color {
+      color: rgb(248, 248, 248);
+      background-color: rgb(67, 151, 34);
+    }
+
+    .btn-transactions-color:hover {
+      background-color: rgb(81, 171, 46);
+      color: rgb(248, 248, 248);
+    }
+
+    .btn-transactions-color:focus {
+      background-color: rgb(81, 171, 46);
+      color: rgb(248, 248, 248);
+    }
+
 
     .col-form-label {
       text-align: right;

@@ -35,80 +35,32 @@
         </ul>
       </article>
 
-      <article
-        v-else-if="
-          jwt !== undefined && jwt !== '' && this.user.roles !== 'Admin'
-        "
-        class="mx-0 px-0"
-      >
+      <article v-else-if="jwt !== undefined && jwt !== '' && this.user.roles !== 'Admin'" class="mx-0 px-0">
         <ul class="navbar-nav w-100">
           <li class="nav-item">
-            <router-link
-              class="nav-link"
-              id="homeNavLink"
-              tag="li"
-              active-class="active"
-              aria-current="page"
-              to="/"
-              exact
-            >
-              <span v-if="keyboardNavigationOptimization == 'true'">(1) </span
-              >Home</router-link
-            >
+            <router-link class="nav-link" id="homeNavLink" tag="li" active-class="active" aria-current="page" to="/" exact>
+              <span v-if="keyboardNavigationOptimization == 'true'">(1) </span>Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link
-              class="nav-link"
-              id="bankAccountsNavLink"
-              tag="li"
-              active-class="active"
-              to="/bank-accounts"
-            >
+            <router-link class="nav-link" id="bankAccountsNavLink" tag="li" active-class="active" to="/bank-accounts">
               <span v-if="keyboardNavigationOptimization == 'true'">(2) </span
               >Bank Accounts</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link
-              class="nav-link"
-              id="transactionsNavLink"
-              tag="li"
-              active-class="active"
-              to="/transactions"
-            >
-              <span v-if="keyboardNavigationOptimization == 'true'">(3) </span
-              >Transactions</router-link
-            >
+            <router-link class="nav-link" id="transactionsNavLink" tag="li" active-class="active" to="/transactions">
+              <span v-if="keyboardNavigationOptimization == 'true'">(3) </span>Transactions</router-link>
           </li>
           <li class="nav-item">
-            <router-link
-              class="nav-link"
-              id="userSettingsNavLink"
-              tag="li"
-              active-class="active"
-              to="/settings"
-            >
-              <span v-if="keyboardNavigationOptimization == 'true'">(4) </span
-              >User Settings</router-link
-            >
+            <router-link class="nav-link" id="userSettingsNavLink" tag="li" active-class="active" to="/settings">
+              <span v-if="keyboardNavigationOptimization == 'true'">(4) </span>User Settings</router-link>
           </li>
           <li class="nav-item dropdown ml-auto">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <span v-if="keyboardNavigationOptimization == 'true'">(5) </span
-              >{{ user.firstName }} {{ user.lastName }}</a
-            >
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+              <span v-if="keyboardNavigationOptimization == 'true'">(5) </span>{{ user.firstName }} {{ user.lastName }}</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <router-link class="dropdown-item" to="/settings"
-                  >Settings</router-link
-                >
+                <router-link class="dropdown-item" to="/settings">Settings</router-link>
               </li>
               <li>
                 <router-link class="dropdown-item" to="/bank-accounts"
@@ -236,12 +188,11 @@ export default {
           }
         }
 
-
-          if(this.jwt !== undefined && this.jwt !== '' && this.user.roles === 'Admin') {
-            if (event.key === "1") {
-               document.getElementById("manageUsersNavLink").focus();
-            }
-            if (event.key === "2") {
+        if(this.jwt !== undefined && this.jwt !== '' && this.user.roles === 'Admin') {
+          if (event.key === "1") {
+            document.getElementById("manageUsersNavLink").focus();
+          }
+          if (event.key === "2") {
                document.getElementById("navbarDropdownMenuLink").focus();
             }
           } 

@@ -23,13 +23,19 @@
 </template>
 
 <script>
+ import {useRouter} from "vue-router";
   export default {
     name: "Login",
+    props: ["user", "jwt"],
     data() {
       return {
         username: '',
-        password: ''
+        password: '',
+        router: useRouter()
       }
+    },
+    mounted() {
+      this.homeIfLoggedIn();
     },
     methods: {
       authenticate(e) {
@@ -44,11 +50,16 @@
 
         instance.post(process.env.VUE_APP_API_URL + "/users/authenticate", loginUser)
           .then((response) => {
-            if (response.data.jwt != undefined) {
+            if (response.data.jwt !== undefined && response.data.jwt !== '') {
               this.$parent.$parent.login(loginUser.username, response.data.jwt);
             }
           }).catch(err => console.log(err));
       },
+      homeIfLoggedIn() {
+        if(this.user.jwt !== undefined && this.user.jwt.length && this.user !== []) {
+          this.router.push({ name: 'Home' });
+        }
+      }
     }
   }
 </script>

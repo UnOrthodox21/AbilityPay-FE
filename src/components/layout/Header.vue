@@ -22,8 +22,10 @@
 
             <p class="mt-3" for="colorBlindnessOptimizationDropdown"><b>Color Blindness optimization:</b></p>
             <select class="form-select accessibilityDropdown" aria-label="Select color disability optimization" v-model="colorBlindnessOptimization" @change="setColorBlindnessOptimization" id="colorBlindnessOptimizationDropdown">
-                <option value="false">Disabled</option>
-                <option selected value="true">Enabled</option>
+                <option value="disabled">Disabled</option>
+                <option selected value="deuteranopia">Deuteranopia (no Green)</option>
+                <option value="protanopia">Protanopia (no Red)</option>
+                <option value="tritanopia">Tritanopia (no Blue)</option>
             </select>
 
             <p class="mt-3"><b>Keyboard navigation optimization:</b></p>
@@ -159,7 +161,7 @@ export default {
         },
         setColorBlindnessOptimization() {
             this.$parent.setColorBlindnessOptimization(
-                this.colorBlindnessOptimization
+                this.colorBlindnessOptimization                  
             );
         },
         setKeyboardNavigationOptimization() {
@@ -174,7 +176,7 @@ export default {
             fontFamily: "segoeUi",
             fontSize: "100%",
             fontWeight: "600",
-            colorBlindnessOptimization: "true",
+            colorBlindnessOptimization: "deuteranopia",
             keyboardNavigationOptimization: "true"
         };
     },

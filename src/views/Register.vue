@@ -52,6 +52,7 @@
 
   export default {
     name: "Register",
+    props: ["user", "jwt"],
     data() {
       return {
         firstName: '',
@@ -63,6 +64,9 @@
         password: '',
         router: useRouter()
       }
+    },
+    mounted() {
+      this.homeIfLoggedIn();
     },
     methods: {
       register(e) {
@@ -94,9 +98,13 @@
             this.router.push('Login');
           })
           .catch((err) => console.log(err));
+      },
+      homeIfLoggedIn() {
+        if(this.user.jwt !== undefined && this.user.jwt.length && this.user !== []) {
+          this.router.push({ name: 'Home' });
+        }
       }
-    }
-
+   }
   }
 </script>
 
