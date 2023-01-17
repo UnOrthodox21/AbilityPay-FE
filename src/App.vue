@@ -56,8 +56,8 @@ export default {
         fontWeight600: true,
         fontWeight800: false,
         colorBlindnessOptimization: "true",
-        colorBlindnessOptimizationDeuteranopia: true,
-        colorBlindnessOptimizationPolinopia: false,
+        colorBlindnessOptimizationProtanopia: true,
+        colorBlindnessOptimizationDeuteranopia: false,
         colorBlindnessOptimizationTritanopia: false,
         keyboardNavigationOptimization: "true"
       }
@@ -83,8 +83,8 @@ export default {
       },
         compBodyClasses() {
           return {
+            colorBlindnessOptimizationProtanopia: this.colorBlindnessOptimizationProtanopia,
             colorBlindnessOptimizationDeuteranopia: this.colorBlindnessOptimizationDeuteranopia,
-            colorBlindnessOptimizationPolinopia: this.colorBlindnessOptimizationPolinopia,
             colorBlindnessOptimizationTritanopia: this.colorBlindnessOptimizationTritanopia
           }
       },      
@@ -197,16 +197,16 @@ export default {
           this.colorBlindnessOptimization = "true";
         }
    
+        if (colorBlindnessOptimization == "protanopia") { 
+          this.colorBlindnessOptimizationProtanopia = true; 
+        } else { 
+          this.colorBlindnessOptimizationProtanopia = false; 
+        }
+
         if (colorBlindnessOptimization == "deuterenopia") { 
             this.colorBlindnessOptimizationDeuteranopia = true; 
           } else { 
             this.colorBlindnessOptimizationDeuteranopia = false; 
-          }
-
-        if (colorBlindnessOptimization == "protanopia") { 
-            this.colorBlindnessOptimizationProtanopia = true; 
-          } else { 
-            this.colorBlindnessOptimizationProtanopia = false; 
           }
 
         if (colorBlindnessOptimization == "tritanopia") { 
@@ -241,7 +241,7 @@ export default {
   #app {
     text-align: center;
     color: rgb(248, 248, 248);
-    background-image: url("assets/images/background 4.jpeg");
+    background-image: url("assets/images/background.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -358,17 +358,16 @@ export default {
     font-weight: 800 !important;
   }
 
-
-  .colorBlindnessDeuteranopia {
-    background-image: url("assets/images/background 4.jpeg") !important;
+  .colorBlindnessProtanopia {
+    background-image: url("assets/images/background.jpeg") !important;
   }
 
-  .colorBlindnessProtanopia {
-    background-image: url("assets/images/background 2.jpeg") !important;
+  .colorBlindnessDeuteranopia {
+    background-image: url("assets/images/background_deuteranopia.jpg") !important;
   }
 
   .colorBlindnessTritanopia {
-    background-image: url("assets/images/background 1.jpeg") !important;
+    background-image: url("assets/images/background_tritanopia.jpg") !important;
   }
 
   @media screen and (min-width:1200px) {

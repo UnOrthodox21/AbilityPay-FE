@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isJwtEmpty">
+  <section v-if="this.user.jwt === undefined || this.user.jwt === ''">
     <section class="container" id="home-menu">
       <section class="row">
         <section class="col-6 text-left mt-3 mb-3 pt-2">
@@ -12,7 +12,7 @@
               <section class="row">
                 <article class="col-12 text-center">
                   <router-link class="btn btn-login text-center" id="loginButton" to="/login"
-                    ><b><span v-if="this.keyboardNavigationOptimization == 'true'">(3) </span>Login</b></router-link
+                    ><b><span v-if="keyboardNavigationOptimization == 'true'">(3) </span>Login</b></router-link
                   >
                 </article>
               </section>
@@ -34,7 +34,7 @@
               <section class="row">
                 <article class="col-12 text-center">
                   <router-link class="btn btn-register" id="registerButton" to="/register"
-                    ><b><span v-if="this.keyboardNavigationOptimization == 'true'">(4) </span>Register</b></router-link
+                    ><b><span v-if="keyboardNavigationOptimization == 'true'">(4) </span>Register</b></router-link
                   >
                 </article>
               </section>
@@ -68,8 +68,26 @@
               <section class="row">
                 <article class="col-12 text-center">
                   <router-link class="btn btn-users" id="userSettingsButton" to="/settings">
-                    <b><span v-if="this.keyboardNavigationOptimization == 'true' && this.user.jwt !== undefined && this.user.roles !== 'Admin'">(6) </span>
-                      <span v-if="this.keyboardNavigationOptimization == 'true' && this.user.jwt !== undefined && this.user.roles === 'Admin' ">(3) </span>User Settings</b></router-link >
+                    <b
+                      ><span
+                        v-if="
+                          keyboardNavigationOptimization == 'true' &&
+                            this.user.jwt !== undefined &&
+                            this.user.roles !== 'Admin'
+                        "
+                        >(6)
+                      </span>
+                      <span
+                        v-if="
+                          keyboardNavigationOptimization == 'true' &&
+                            this.user.jwt !== undefined &&
+                            this.user.roles === 'Admin'
+                        "
+                        >(3)
+                      </span>
+                      User Settings</b
+                    ></router-link
+                  >
                 </article>
               </section>
             </section>
@@ -134,14 +152,21 @@
                     ><b>
                       <span
                         v-if="
-                          this.keyboardNavigationOptimization == 'true' &&
-                            this.user.roles !== 'Admin'">(7) 
+                          keyboardNavigationOptimization == 'true' &&
+                            this.user.jwt !== undefined &&
+                            this.user.roles !== 'Admin'
+                        "
+                        >(7)
                       </span>
                       <span
                         v-if="
-                          this.keyboardNavigationOptimization == 'true' &&
-                            this.user.roles === 'Admin'">(4) 
-                      </span>Bank Accounts</b
+                          keyboardNavigationOptimization == 'true' &&
+                            this.user.jwt !== undefined &&
+                            this.user.roles === 'Admin'
+                        "
+                        >(4)
+                      </span>
+                      Bank Accounts</b
                     ></router-link
                   >
                 </article>
@@ -154,16 +179,18 @@
         <article class="col-12 my-4">
           <router-link
             class="btn btn-transactions mt-auto"
-            v-class="{ 'btn-transactions-color': this.colorBlindnessOptimization == 'false' }"
+            :class="{ 'btn-transactions-color': colorBlindnessOptimization == 'false' }"
             id="transactionsButton"
             to="/transactions"
             ><b>
               <span
                 v-if="
-                  this.keyboardNavigationOptimization === 'true' &&
+                  keyboardNavigationOptimization == 'true' &&
+                    this.user.jwt !== undefined &&
                     this.user.roles !== 'Admin'
                 "
-                >(8) </span>Transactions</b
+                >(8)
+              </span>Transactions</b
             ></router-link
           >
         </article>
@@ -173,13 +200,23 @@
         <article class="col-12 my-4">
           <router-link
             class="btn btn-transactions mt-auto"
-            v-class="{ 'btn-manage-users': this.colorBlindnessOptimization == 'false' }"
+            :class="{ 'btn-manage-users': colorBlindnessOptimization == 'false' }"
             id="manageUsersButton"
             to="/admin/users"
           >
-            <b>
-              <span v-if="this.keyboardNavigationOptimization == 'true' &&
-                    this.user.roles === 'Admin'">(5) </span>Manage Users</b></router-link >
+            <b
+              ><span v-if="keyboardNavigationOptimization == 'true'">(5) </span>
+              <span
+                v-if="
+                  keyboardNavigationOptimization == 'true' &&
+                    this.user.jwt !== undefined &&
+                    this.user.roles === 'Admin'
+                "
+                >(5)
+              </span>
+              Manage Users</b
+            ></router-link
+          >
         </article>
       </section>
     </section>
@@ -196,13 +233,7 @@ export default {
     };
   },
   mounted() {
-  
     document.addEventListener("keydown", this.onKeydown);
-  },
-  computed: {
-      isJwtEmpty() {
-         return this.user.jwt === undefined  || this.user.jwt === '';
-      }
   },
   methods: {
     onKeydown(event) {
@@ -241,10 +272,9 @@ export default {
                 document.getElementById("manageUsersButton").focus();
             }
           } 
-
       }
     }
-  }
+  },
 }
 </script>
 
@@ -365,5 +395,4 @@ ul {
   width: 45em;
   padding: 1em;
 }
-
 </style>

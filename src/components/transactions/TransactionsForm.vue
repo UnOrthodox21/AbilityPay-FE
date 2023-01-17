@@ -39,9 +39,7 @@
 
   <div class="form-group row mt-5 mb-0">
     <div class="col-12">
-  <button type="submit" class="btn btn-transactions" 
-  v-class="{ 'btn-transactions-color': colorBlindnessOptimization == 'false' }" 
-  id="submitButton">Submit</button>
+  <button type="submit" class="btn btn-transactions" id="submitButton">Submit</button>
 
 
   <div class="alert mt-5" id="transaction-alert" style="display: none;" role="alert"></div>
