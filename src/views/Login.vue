@@ -5,16 +5,19 @@
         <h1 class="h1 mb-3 fw-normal my-5 text-center">Please Log In</h1>
         <form @submit="authenticate">
           <div class="form-group">
-            <label for="usernameInput" class="my-3">Username</label>
+            <label for="usernameInput" class="my-3">
+                <span v-if="keyboardNavigationOptimization == 'true'">(3) </span>Username</label>
             <input v-model="this.username" type="text" class="form-control" id="usernameInput" placeholder="Username"
               required>
           </div>
           <div class="form-group mt-5">
-            <label for="passwordInput" class="my-3">Password</label>
+            <label for="passwordInput" class="my-3">
+               <span v-if="keyboardNavigationOptimization == 'true'">(4) </span>Password</label>
             <input v-model="this.password" type="password" class="form-control" id="passwordInput"
               placeholder="Password" required>
           </div>
-          <button type="submit" class="btn btn-login">Submit</button>
+          <button type="submit" class="btn btn-login" id="submitButton">
+            <span v-if="keyboardNavigationOptimization == 'true'">(5) </span>Submit</button>
         </form>
       </div>
     </div>
@@ -26,7 +29,7 @@
  import {useRouter} from "vue-router";
   export default {
     name: "Login",
-    props: ["user", "jwt"],
+    props: ["user", "jwt", "keyboardNavigationOptimization"],
     data() {
       return {
         username: '',
@@ -36,6 +39,7 @@
     },
     mounted() {
       this.homeIfLoggedIn();
+      document.addEventListener("keydown", this.onKeydown);
     },
     methods: {
       authenticate(e) {
@@ -59,8 +63,24 @@
         if(this.user.jwt !== undefined && this.user.jwt.length && this.user !== []) {
           this.router.push({ name: 'Home' });
         }
+      },
+      onKeydown(event) {
+      if (this.keyboardNavigationOptimization == "true" && event.target.nodeName !== "INPUT") {
+            if (event.key === "3") {
+                event.preventDefault();
+                document.getElementById("usernameInput").focus();
+            }
+            if (event.key === "4") {
+                event.preventDefault();
+                document.getElementById("passwordInput").focus();
+            }
+            if (event.key === "5") {
+                event.preventDefault();
+                document.getElementById("submitButton").focus();
+            }
       }
-    }
+    },
+   }
   }
 </script>
 

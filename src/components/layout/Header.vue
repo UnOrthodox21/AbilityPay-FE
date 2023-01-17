@@ -23,8 +23,8 @@
             <p class="mt-3" for="colorBlindnessOptimizationDropdown"><b>Color Blindness optimization:</b></p>
             <select class="form-select accessibilityDropdown" aria-label="Select color disability optimization" v-model="colorBlindnessOptimization" @change="setColorBlindnessOptimization" id="colorBlindnessOptimizationDropdown">
                 <option value="disabled">Disabled</option>
-                <option selected value="deuteranopia">Deuteranopia (no Green)</option>
-                <option value="protanopia">Protanopia (no Red)</option>
+                <option selected value="protanopia">Protanopia (no Red)</option>
+                <option value="deuteranopia">Deuteranopia (no Green)</option>
                 <option value="tritanopia">Tritanopia (no Blue)</option>
             </select>
 
@@ -176,7 +176,7 @@ export default {
             fontFamily: "segoeUi",
             fontSize: "100%",
             fontWeight: "600",
-            colorBlindnessOptimization: "deuteranopia",
+            colorBlindnessOptimization: "protanopia",
             keyboardNavigationOptimization: "true"
         };
     },
