@@ -190,9 +190,12 @@ export default {
 
         if(this.jwt !== undefined && this.jwt !== '' && this.user.roles === 'Admin') {
           if (event.key === "1") {
-            document.getElementById("manageUsersNavLink").focus();
+            document.getElementById("homeNavLink").focus();
           }
           if (event.key === "2") {
+            document.getElementById("manageUsersNavLink").focus();
+          }
+          if (event.key === "3") {
                document.getElementById("navbarDropdownMenuLink").focus();
             }
           } 

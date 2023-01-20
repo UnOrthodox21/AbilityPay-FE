@@ -2,7 +2,7 @@
     <footer class="container-fluid footer text-center py-5" id="footer-container">
         <section class="row">
             <article class="col-12">
-                <p>©2022 Rihards Edmunds Cērps</p>
+                <p>©2023 Rihards Edmunds Cērps</p>
             </article>
         </section>
     </footer>

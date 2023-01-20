@@ -1,6 +1,6 @@
 <template>
   <SettingsBanner/>
-  <SettingsForm v-bind:user="user"/>
+  <SettingsForm v-bind:user="user" v-bind:keyboardNavigationOptimization="keyboardNavigationOptimization"/>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
     SettingsBanner,
     SettingsForm
   },
-  props: ["user"]
+  props: ["user", "keyboardNavigationOptimization"]
 }
 </script>
 

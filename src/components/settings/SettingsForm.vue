@@ -4,46 +4,47 @@
         <div class="col-12">
   <form v-on:submit="submitChanges"> 
   <div class="form-group"  style="width:300px;margin:auto;">
-    <label for="emailInput">Email address </label>
+    <label for="emailInput"><span v-if="keyboardNavigationOptimization == 'true'">(6) </span>Email address </label>
     <input type="email" class="form-control" v-model="email" id="emailInput" minlength="9" maxlength="30" required>
   </div>
 
    <div class="form-group my-5" style="width:300px;margin:auto;">
-    <label for="nameInput">Name:</label>
-    <input type="text"  class="form-control" v-model="firstName" id="nameInput" minlength="2" maxlength="20" required>
+    <label for="nameInput"><span v-if="keyboardNavigationOptimization == 'true'">(7) </span>First name:</label>
+    <input type="text" class="form-control" v-model="firstName" id="nameInput" minlength="2" maxlength="20" required>
   </div>
 
   <div class="form-group my-5" style="width:300px;margin:auto;">
-    <label for="surnameInput">Last name:</label>
+    <label for="surnameInput"><span v-if="keyboardNavigationOptimization == 'true'">(8) </span>Last name:</label>
     <input type="text" class="form-control" v-model="lastName" id="surnameInput" minlength="2" maxlength="20" required>
   </div>
 
   <div class="form-group my-5" style="width:300px;margin:auto;">
-    <label for="phoneInput">Phone number:</label>
+    <label for="phoneInput"><span v-if="keyboardNavigationOptimization == 'true'">(-) </span>Phone number:</label>
     <input type="number" class="form-control" v-model="phone" id="phoneInput" minlength="8"  maxlength="20" required>
   </div>
 
   <div class="form-group my-5" style="width:300px;margin:auto;">
-    <label for="addressInput">Address:</label>
+    <label for="addressInput"><span v-if="keyboardNavigationOptimization == 'true'">(=) </span>Address:</label>
     <input type="text" class="form-control" v-model="address" id="addressInput" minlength="8" maxlength="40" required>
   </div>
 
   <div class="form-group my-5" style="width:300px;margin:auto;">
-    <label for="passwordInput">New password:</label>
+    <label for="passwordInput"><span v-if="keyboardNavigationOptimization == 'true'">([) </span>New password:</label>
     <input type="password" class="form-control" v-model="passwordFirst" id="passwordInput" minlength="8" maxlength="40" >
   </div>
 
  <div class="form-group my-5" style="width:300px;margin:auto;">
-    <label for="passwordInputTwo">Repeat new password:</label>
+    <label for="passwordInputTwo"><span v-if="keyboardNavigationOptimization == 'true'">(]) </span>Repeat new password:</label>
     <input type="password" class="form-control" v-model="passwordSecond"  id="passwordInputTwo" minlength="8" maxlength="40" >
   </div>
 
    <div class="form-group my-5" style="width:300px;margin:auto;">
-    <label for="imageInput">User image:</label>
+    <label for="imageInput"><span v-if="keyboardNavigationOptimization == 'true'">(\) </span>User image:</label>
     <input type="file" class="form-control" id="imageInput" accept="image/png, image/jpeg">
   </div>
 
-   <button @click="submitChanges()" class="btn btn-login mt-4" type="submit">Submit form</button>
+   <button @click="submitChanges()" id="submitButton" class="btn btn-login mt-4" type="submit">
+    <span v-if="keyboardNavigationOptimization == 'true'">(`) </span>Submit form</button>
 </form>
         </div>
     </div>
@@ -73,7 +74,10 @@ export default {
     created() {
       this.$parent.$parent.$parent.setUser(this.user.jwt);
     },
-    props: ["user"],
+    props: ["user", "keyboardNavigationOptimization"],
+    mounted() {
+      document.addEventListener("keydown", this.onKeydown);
+    },
     methods: {
         submitChanges(e) {
 
@@ -112,7 +116,47 @@ export default {
       alert("Passwords don't match!!");
     }
 
-  }
+  },
+   onKeydown(event) {
+      if (this.keyboardNavigationOptimization == 'true' && event.target.nodeName !== "INPUT") {
+            if (event.key === "6") {
+                event.preventDefault();
+                document.getElementById("emailInput").focus();
+            }
+            if (event.key === "7") {
+                event.preventDefault();
+                document.getElementById("nameInput").focus();
+            }
+            if (event.key === "8") {
+                event.preventDefault();
+                document.getElementById("surnameInput").focus();
+            }
+            if (event.key === "-") {
+                event.preventDefault();
+                document.getElementById("phoneInput").focus();
+            }
+            if (event.key === "=") {
+                event.preventDefault();
+                document.getElementById("addressInput").focus();
+            }
+            if (event.key === "[") {
+                event.preventDefault();
+                document.getElementById("passwordInput").focus();
+            }
+            if (event.key === "]") {
+                event.preventDefault();
+                document.getElementById("passwordInputTwo").focus();
+            }
+            if (event.keyCode === 220) {
+                event.preventDefault();
+                document.getElementById("imageInput").focus();
+            }
+            if (event.key === "`") {
+                event.preventDefault();
+                document.getElementById("submitButton").focus();
+            }
+      }
+    },
 }
 }
 </script>

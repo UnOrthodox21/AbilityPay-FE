@@ -1,5 +1,5 @@
 <template>
-  <section v-bind:class="compBodyClasses">
+  <section id="body-section" v-bind:class="compBodyClasses">
     <Header v-bind:user="user" v-bind:jwt="jwt" />
     <main class="container-fluid" v-bind:class="compFontClasses">
       <section class="row">
@@ -47,11 +47,11 @@ export default {
         fontFamilyAriel: false,
         fontFamilyTimesNewRoman: false,
         fontFamilyComicSans: false,
-        fontSize90: false,
+        fontSize80: false,
+        fontSize85: false,
+        fontSize90: true,
         fontSize95: false,
-        fontSize100: true,
-        fontSize105: false,
-        fontSize110: false,
+        fontSize100: false,
         fontWeight400: false,
         fontWeight600: true,
         fontWeight800: false,
@@ -71,11 +71,11 @@ export default {
           fontFamilyTimesNewRoman: this.fontFamilyTimesNewRoman,
           fontFamilySegoeUi: this.fontFamilySegoeUi,
           fontFamilyComicSans: this.fontFamilyComicSans,
+          fontSize80: this.fontSize80,
+          fontSize85: this.fontSize85,
           fontSize90: this.fontSize90,
           fontSize95: this.fontSize95,
           fontSize100: this.fontSize100,
-          fontSize105: this.fontSize105,
-          fontSize110: this.fontSize110,
           fontWeight400: this.fontWeight400,
           fontWeight600: this.fontWeight600,
           fontWeight800: this.fontWeight800
@@ -179,11 +179,11 @@ export default {
       },
 
       setFontSize(fontSize) {
+        if (fontSize == "80") { this.fontSize80 = true; } else { this.fontSize80 = false; }
+        if (fontSize == "85") { this.fontSize85 = true; } else { this.fontSize85 = false; }
         if (fontSize == "90") { this.fontSize90 = true; } else { this.fontSize90 = false; }
         if (fontSize == "95") { this.fontSize95 = true; } else { this.fontSize95 = false; }
         if (fontSize == "100") { this.fontSize100 = true; } else { this.fontSize100 = false; }
-        if (fontSize == "105") { this.fontSize105 = true; } else { this.fontSize105 = false; }
-        if (fontSize == "110") { this.fontSize110 = true; } else { this.fontSize110 = false; }
       },
       setFontWeight(fontWeight) {
         if (fontWeight == "400") { this.fontWeight400 = true; } else { this.fontWeight400 = false; }
@@ -203,7 +203,7 @@ export default {
           this.colorBlindnessOptimizationProtanopia = false; 
         }
 
-        if (colorBlindnessOptimization == "deuterenopia") { 
+        if (colorBlindnessOptimization == "deuteranopia") { 
             this.colorBlindnessOptimizationDeuteranopia = true; 
           } else { 
             this.colorBlindnessOptimizationDeuteranopia = false; 
@@ -238,7 +238,7 @@ export default {
     flex-shrink: 0;
   }
 
-  #app {
+  #body-section {
     text-align: center;
     color: rgb(248, 248, 248);
     background-image: url("assets/images/background.jpeg");
@@ -269,10 +269,10 @@ export default {
   }
 
   .btn-transactions {
-    color: rgb(248, 248, 248);
+    color: rgb(250, 250, 250);
     text-align: center;
     vertical-align: center;
-    background-color: rgb(67, 151, 34);
+    background-color: #414b55;
     font-size: 1.3em;
     height: 3.5em;
     width: 40em;
@@ -280,8 +280,13 @@ export default {
   }
 
   .btn-transactions:hover {
-    background-color: rgb(81, 171, 46);
-    color: rgb(248, 248, 248);
+    color: rgb(250, 250, 250);
+    background-color: #2a2e32;
+  }
+
+  .btn-transactions:focus {
+    color: rgb(250, 250, 250);
+    background-color: #2a2e32;
   }
 
   .btn-login {
@@ -326,6 +331,14 @@ export default {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
   }
 
+  .fontSize80 {
+    font-size: 80%;
+  }
+
+  .fontSize85 {
+    font-size: 85%;
+  }
+
   .fontSize90 {
     font-size: 90%;
   }
@@ -336,14 +349,6 @@ export default {
 
   .fontSize100 {
     font-size: 100%;
-  }
-
-  .fontSize105 {
-    font-size: 105%;
-  }
-
-  .fontSize110 {
-    font-size: 110%;
   }
 
   .fontWeight400 * {
@@ -358,16 +363,16 @@ export default {
     font-weight: 800 !important;
   }
 
-  .colorBlindnessProtanopia {
+  .colorBlindnessOptimizationProtanopia {
     background-image: url("assets/images/background.jpeg") !important;
   }
 
-  .colorBlindnessDeuteranopia {
-    background-image: url("assets/images/background_deuteranopia.jpg") !important;
+  .colorBlindnessOptimizationDeuteranopia {
+      background-image: url("assets/images/background_deuteranopia.jpg") !important;
   }
 
-  .colorBlindnessTritanopia {
-    background-image: url("assets/images/background_tritanopia.jpg") !important;
+  .colorBlindnessOptimizationTritanopia {
+       background-image: url("assets/images/background_tritanopia.jpg") !important;
   }
 
   @media screen and (min-width:1200px) {

@@ -1,6 +1,6 @@
 <template>
-<button @click="createNewBankAccount()" class="btn btn-top-menu mr-2">Create a new account</button>
-<router-link to="/transactions"  class="btn btn-top-menu ml-2">Send money</router-link>
+<button id="createNewBankAccountButton" @click="createNewBankAccount()" class="btn btn-top-menu mr-2"><span v-if="keyboardNavigationOptimization == 'true'">(-) </span>Create a new account</button>
+<router-link id="sendMoneyButton" to="/transactions"  class="btn btn-top-menu ml-2"><span v-if="keyboardNavigationOptimization == 'true'">(=) </span>Send money</router-link>
 
    <table class="table my-5 mx-auto">
   <thead>
@@ -18,9 +18,11 @@
       <td> {{ bankAccount.number }}</td>
       <td>{{ bankAccount.type}}</td>
       <td>{{ $filters.formatCurrency(bankAccount.balance) }}</td>
-      <td><button @click="setSelectedBankAccount(index)" type="button" class="btn btn-outline-info mx-2" data-toggle="modal" data-target="#bankAccountEditModal"> Edit </button>
-      <router-link @click="this.$parent.$parent.$parent.setTransactions(bankAccount.number)" to="/transactions-history" type="button" class="btn btn-outline-success mx-2"> Transaction history </router-link>
-      <button v-if="bankAccount.type === 'Secondary'" @click="deleteBankAccount(bankAccount)" type="button" class="btn btn-outline-danger mx-2"> Delete </button></td>
+      <td><button v-if="bankAccount.type === 'Primary'" id="editButton" @click="setSelectedBankAccount(index)" type="button" class="btn mx-2" data-toggle="modal" data-target="#bankAccountEditModal" :class="{ 'btn-outline-info': colorBlindnessOptimization == 'false', 'btn-outline-dark': colorBlindnessOptimization == 'true' }"><span v-if="keyboardNavigationOptimization == 'true'"> (6) </span>Edit </button>
+      <button v-if="bankAccount.type === 'Secondary'" @click="setSelectedBankAccount(index)" type="button" class="btn mx-2" data-toggle="modal" data-target="#bankAccountEditModal" :class="{ 'btn-outline-info': colorBlindnessOptimization == 'false', 'btn-outline-dark': colorBlindnessOptimization == 'true' }"> Edit </button>
+      <router-link v-if="bankAccount.type === 'Primary'" id="transactionHistoryButton" @click="this.$parent.$parent.$parent.setTransactions(bankAccount.number)" to="/transactions-history" type="button" class="btn mx-2" :class="{ 'btn-outline-success': colorBlindnessOptimization == 'false', 'btn-outline-dark': colorBlindnessOptimization == 'true' }"><span v-if="keyboardNavigationOptimization == 'true'"> (7) </span>Transaction history </router-link>
+      <router-link v-if="bankAccount.type === 'Secondary'" @click="this.$parent.$parent.$parent.setTransactions(bankAccount.number)" to="/transactions-history" type="button" class="btn mx-2" :class="{ 'btn-outline-success': colorBlindnessOptimization == 'false', 'btn-outline-dark': colorBlindnessOptimization == 'true' }"> Transaction history </router-link>
+      <button v-if="bankAccount.type === 'Secondary'" @click="deleteBankAccount(bankAccount)" type="button" class="btn mx-2" :class="{ 'btn-outline-danger': colorBlindnessOptimization == 'false', 'btn-outline-dark': colorBlindnessOptimization == 'true' }"> Delete </button></td>
     </tr>
   </tbody>
 
@@ -70,7 +72,10 @@ export default {
       }
     },
 
-    props: ["user","bankAccounts"],
+    props: ["user","bankAccounts", "keyboardNavigationOptimization", "colorBlindnessOptimization"],
+    mounted() {
+      document.addEventListener("keydown", this.onKeydown);
+    },
     
      methods: {
       deleteBankAccount(bankAccount){
@@ -113,7 +118,27 @@ export default {
             "type": this.bankAccounts[index].type,
             "balance": this.bankAccounts[index].balance
         }
+      },
+       onKeydown(event) {
+      if (this.keyboardNavigationOptimization == 'true' && event.target.nodeName !== "INPUT") {
+            if (event.key === "6") {
+                event.preventDefault();
+                document.getElementById("editButton").focus();
+            }
+            if (event.key === "7") {
+                event.preventDefault();
+                document.getElementById("transactionHistoryButton").focus();
+            }
+            if (event.key === "-") {
+                event.preventDefault();
+                document.getElementById("createNewBankAccountButton").focus();
+            }
+            if (event.key === "=") {
+                event.preventDefault();
+                document.getElementById("sendMoneyButton").focus();
+            }
       }
+    },
      }
 }
 </script>
@@ -124,19 +149,24 @@ export default {
         background-color: #414b55;
         font-size: 1.4em;
         padding: 1em;
-        height: 3.5em;
+        height: 4.5em;
         width: 12em;
+        padding-top: auto;
+        padding-bottom: auto;
         text-align: center;
         vertical-align: center;
-        margin-bottom: 30px;
     }
 
     .btn-top-menu:hover {
           background-color: #2a2e32;
     }
 
-      .btn-top-menu:focus {
+    .btn-top-menu:focus {
           background-color: #2a2e32;
+    }
+
+    #sendMoneyButton {
+      padding-top: 1.45em;
     }
 
     .table {

@@ -4,19 +4,19 @@
     <div class="col-12">
     <form @submit="transferFunds">
   <div class="form-group row mt-0 mb-4">
-      <label for="recipientNameInput" class="col-2 col-form-label">Recipient name:</label>
+      <label for="recipientNameInput" class="col-2 col-form-label"><span v-if="keyboardNavigationOptimization == 'true'">(6) </span>Recipient name:</label>
     <div class="col-8">
     <input type="text" class="form-control" id="recipientNameInput" v-model="recipientName" name="recipientName" aria-describedby="recipientHelp" placeholder="Enter recipient name" required>
   </div>
   </div>
   <div class="form-group row my-4">
-        <label for="recipientAccountInput" class="col-2 col-form-label">Recipient account:</label>
+        <label for="recipientAccountInput" class="col-2 col-form-label"><span v-if="keyboardNavigationOptimization == 'true'">(7) </span>Recipient account:</label>
         <div class="col-8">
     <input type="text" class="form-control" id="recipientAccountInput" v-model="recipientBankAccount" name="recipientBankAccount" placeholder="Enter recipient bank account" required>
   </div>
   </div>
      <div class="form-group row my-4">
-  <label for="userBankAccountInput" class="col-2 col-form-label">User bank accounts:</label>
+  <label for="userBankAccountInput" class="col-2 col-form-label"><span v-if="keyboardNavigationOptimization == 'true'">(8) </span>User bank accounts:</label>
       <div class="col-8">
     <select class="form-control" id="userBankAccountInput" v-if="this.bankAccounts[0].number !== undefined" v-model="userBankAccount" name="usertBankAccount" placeholder="Select your bank account" required >
        <option v-bind:key="bankAccount.id" v-for="(bankAccount, index) in bankAccounts" v-bind:value="bankAccount.number" v-bind:selected="index === 0">{{ index + 1 }}. {{ bankAccount.number }}</option>
@@ -24,13 +24,13 @@
   </div>
   </div>
     <div class="form-group row my-4">
-    <label for="transferAmountInput" class="col-2 col-form-label">Transfer amount:</label>
+    <label for="transferAmountInput" class="col-2 col-form-label"><span v-if="keyboardNavigationOptimization == 'true'">(-) </span>Transfer amount:</label>
     <div class="col-8">
     <input type="number" step="0.01" min="0" max="99999999" mi class="form-control" id="transferAmountInput" v-model="transferAmount" name="transferAmount" placeholder="Enter transfer amount" required>
   </div>
   </div>
      <div class="form-group row my-4">
-    <label for="descriptionInput" class="col-2 col-form-label">Description</label>
+    <label for="descriptionInput" class="col-2 col-form-label"><span v-if="keyboardNavigationOptimization == 'true'">(=) </span>Description</label>
     <div class="col-8">
     <input type="text" class="form-control mb-2" id="descriptionInput" v-model="description" name="description" placeholder="Enter description" required>
   </div>
@@ -39,7 +39,7 @@
 
   <div class="form-group row mt-5 mb-0">
     <div class="col-12">
-  <button type="submit" class="btn btn-transactions" id="submitButton">Submit</button>
+  <button type="submit" class="btn btn-transactions" :class="{ 'btn-transactions-color': colorBlindnessOptimization == 'false' }" id="submitButton"><span v-if="keyboardNavigationOptimization == 'true'">(`) </span>Submit</button>
 
 
   <div class="alert mt-5" id="transaction-alert" style="display: none;" role="alert"></div>
@@ -63,6 +63,7 @@ export default {
 
     mounted() {
       this.setUserBankAccount();
+      document.addEventListener("keydown", this.onKeydown);
     },
 
       data() {
@@ -74,7 +75,7 @@ export default {
         description: ''
       }
     },
-    props: ["bankAccounts", "colorBlindnessOptimization"],
+    props: ["bankAccounts", "colorBlindnessOptimization", "keyboardNavigationOptimization"],
     methods: {
 
     setUserBankAccount() {
@@ -125,6 +126,34 @@ export default {
           console.log(err);
         })
         },
+         onKeydown(event) {
+      if (this.keyboardNavigationOptimization == 'true' && event.target.nodeName !== "INPUT") {
+            if (event.key === "6") {
+                event.preventDefault();
+                document.getElementById("recipientNameInput").focus();
+            }
+            if (event.key === "7") {
+                event.preventDefault();
+                document.getElementById("recipientAccountInput").focus();
+            }
+            if (event.key === "8") {
+                event.preventDefault();
+                document.getElementById("userBankAccountInput").focus();
+            }
+            if (event.key === "-") {
+                event.preventDefault();
+                document.getElementById("transferAmountInput").focus();
+            }
+            if (event.key === "=") {
+                event.preventDefault();
+                document.getElementById("descriptionInput").focus();
+            }
+            if (event.key === "`") {
+                event.preventDefault();
+                document.getElementById("submitButton").focus();
+            }
+      }
+    },
     }
 }
 </script>

@@ -16,9 +16,11 @@
             <br />
 
             <label class="mt-3" for="fontSizeRange"><b>Font-Size:</b></label>
-            <p> - <input type="range" class="range" min="90" max="110" step="5" v-model="fontSize" @change="setFontSize" id="fontSizeRange" /> + </p>
+            <p> - <input type="range" class="range" min="80" max="100" step="5" v-model="fontSize" @change="setFontSize" id="fontSizeRange" /> + </p>
+
             <label for="fontWeightRange"><b>Font-Weight:</b></label>
-            <p> - <input type="range" class="range" min="400" max="800" step="200" v-model="fontWeight" @change="setFontWeight" id="fontWeightRange" /> + </p>
+            <p> - <input v-if="fontFamily == 'segoeUi' || fontFamily == 'arial'" type="range" class="range" min="400" max="800" step="200" v-model="fontWeight" @change="setFontWeight" id="fontWeightRange" />
+            <input v-if="fontFamily == 'timesNewRoman' || fontFamily == 'calibri' || fontFamily == 'comicSans'" type="range" class="range" min="400" max="600" step="200" v-model="fontWeight" @change="setFontWeight" id="fontWeightRange" /> + </p>
 
             <p class="mt-3" for="colorBlindnessOptimizationDropdown"><b>Color Blindness optimization:</b></p>
             <select class="form-select accessibilityDropdown" aria-label="Select color disability optimization" v-model="colorBlindnessOptimization" @change="setColorBlindnessOptimization" id="colorBlindnessOptimizationDropdown">
@@ -136,6 +138,12 @@ export default {
     methods: {
         onKeydown( event ) {
             
+        
+      if (event.key === "Escape") {
+        event.preventDefault();
+        document.activeElement.blur();
+      }
+
         if (this.keyboardNavigationOptimization == "true" && event.target.nodeName !== "INPUT") {
                 if(event.key === '9') {
                     document.getElementById("accessibilitySettingsButton").focus();
@@ -174,7 +182,7 @@ export default {
         return {
             windowWidth: window.innerWidth,
             fontFamily: "segoeUi",
-            fontSize: "100%",
+            fontSize: "90%",
             fontWeight: "600",
             colorBlindnessOptimization: "protanopia",
             keyboardNavigationOptimization: "true"

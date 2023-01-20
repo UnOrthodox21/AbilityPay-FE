@@ -65,7 +65,7 @@
         }
       },
       onKeydown(event) {
-      if (this.keyboardNavigationOptimization == "true" && event.target.nodeName !== "INPUT") {
+      if (this.keyboardNavigationOptimization == 'true' && event.target.nodeName !== "INPUT") {
             if (event.key === "3") {
                 event.preventDefault();
                 document.getElementById("usernameInput").focus();

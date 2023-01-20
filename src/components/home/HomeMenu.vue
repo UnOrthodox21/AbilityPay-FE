@@ -83,7 +83,7 @@
                             this.user.jwt !== undefined &&
                             this.user.roles === 'Admin'
                         "
-                        >(3)
+                        >(4)
                       </span>
                       User Settings</b
                     ></router-link
@@ -164,7 +164,7 @@
                             this.user.jwt !== undefined &&
                             this.user.roles === 'Admin'
                         "
-                        >(4)
+                        >(5)
                       </span>
                       Bank Accounts</b
                     ></router-link
@@ -175,7 +175,7 @@
           </section>
         </section>
       </section>
-      <section class="row">
+      <section v-if="this.user.roles !== 'Admin'" class="row">
         <article class="col-12 my-4">
           <router-link
             class="btn btn-transactions mt-auto"
@@ -204,15 +204,14 @@
             id="manageUsersButton"
             to="/admin/users"
           >
-            <b
-              ><span v-if="keyboardNavigationOptimization == 'true'">(5) </span>
+            <b>
               <span
                 v-if="
                   keyboardNavigationOptimization == 'true' &&
                     this.user.jwt !== undefined &&
                     this.user.roles === 'Admin'
                 "
-                >(5)
+                >(6)
               </span>
               Manage Users</b
             ></router-link
@@ -237,7 +236,7 @@ export default {
   },
   methods: {
     onKeydown(event) {
-      if (this.keyboardNavigationOptimization == "true" && event.target.nodeName !== "INPUT") {
+      if (this.keyboardNavigationOptimization == 'true' && event.target.nodeName !== "INPUT") {
 
         if (this.user.jwt !== undefined && this.jwt !== "" && this.user.roles !== "Admin") {
           if (event.key === "6") {
@@ -262,13 +261,13 @@ export default {
 
 
           if(this.user.jwt !== undefined && this.user.jwt !== '' && this.user.roles === 'Admin') {
-            if (event.key === "3") {
+            if (event.key === "4") {
                 document.getElementById("userSettingsButton").focus();
             }
-            if (event.key === "4") {
+            if (event.key === "5") {
                 document.getElementById("bankAccountsButton").focus();
             }
-            if (event.key === "5") {
+            if (event.key === "6") {
                 document.getElementById("manageUsersButton").focus();
             }
           } 

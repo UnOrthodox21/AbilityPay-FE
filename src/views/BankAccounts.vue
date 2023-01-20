@@ -4,7 +4,9 @@
   <div class="row">
     <div class="col-12">
         <BankAccountsBanner/>
-        <BankAccountsTable v-bind:user="user" v-bind:bankAccounts="bankAccounts"/>
+        <BankAccountsTable v-bind:user="user" v-bind:bankAccounts="bankAccounts" 
+         v-bind:keyboardNavigationOptimization="keyboardNavigationOptimization" 
+         v-bind:colorBlindnessOptimization="colorBlindnessOptimization"/>
       </div>
     </div>
 </div>
@@ -21,7 +23,7 @@ export default {
     BankAccountsBanner,
     BankAccountsTable
   },
-  props: ["user", "bankAccounts"]
+  props: ["user", "bankAccounts", "keyboardNavigationOptimization", "colorBlindnessOptimization"]
 }
 </script>
 
