@@ -358,16 +358,16 @@ export default {
     font-weight: 800 !important;
   }
 
-  .colorBlindnessProtanopia {
+  .colorBlindnessOptimizationProtanopia {
     background-image: url("assets/images/background.jpeg") !important;
   }
 
-  .colorBlindnessDeuteranopia {
-    background-image: url("assets/images/background_deuteranopia.jpg") !important;
+  .colorBlindnessOptimizationDeuteranopia {
+      background-image: url("assets/images/background_deuteranopia.jpg") !important;
   }
 
-  .colorBlindnessTritanopia {
-    background-image: url("assets/images/background_tritanopia.jpg") !important;
+  .colorBlindnessOptimizationTritanopia {
+       background-image: url("assets/images/background_tritanopia.jpg") !important;
   }
 
   @media screen and (min-width:1200px) {
