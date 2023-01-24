@@ -18,7 +18,11 @@
           </div>
           <button type="submit" class="btn btn-login" id="submitButton">
             <span v-if="keyboardNavigationOptimization == 'true'">(5) </span>Submit</button>
+
+             <div class="alert alert-danger mt-5" id="transaction-alert" style="display: none;" role="alert"></div>
         </form>
+
+        
       </div>
     </div>
   </div>
@@ -49,11 +53,18 @@
           password: this.password
         }
 
+        let alert = document.getElementById('transaction-alert');
+
         let instance = this.$http.create();
         delete instance.defaults.headers.common['Authorization'];
 
         instance.post(process.env.VUE_APP_API_URL + "/users/authenticate", loginUser)
           .then((response) => {
+              if(response !== null) {
+                  alert.innerHTML = "Authentication failed";
+                  alert.style.display = "block";
+              }
+
             if (response.data.jwt !== undefined && response.data.jwt !== '') {
               this.$parent.$parent.login(loginUser.username, response.data.jwt);
             }
