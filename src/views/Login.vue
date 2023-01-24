@@ -19,7 +19,7 @@
           <button type="submit" class="btn btn-login" id="submitButton">
             <span v-if="keyboardNavigationOptimization == 'true'">(5) </span>Submit</button>
 
-             <div class="alert alert-danger mt-5" id="transaction-alert" style="display: none;" role="alert"></div>
+             <div class="alert alert-danger mt-5" id="transaction-alert" style="display: none;" role="alert">Authentication failed</div>
         </form>
 
         
@@ -44,6 +44,7 @@
     mounted() {
       this.homeIfLoggedIn();
       document.addEventListener("keydown", this.onKeydown);
+      document.getElementById('transaction-alert').style.display = "none";
     },
     methods: {
       authenticate(e) {
@@ -60,15 +61,13 @@
 
         instance.post(process.env.VUE_APP_API_URL + "/users/authenticate", loginUser)
           .then((response) => {
-              if(response !== null) {
-                  alert.innerHTML = "Authentication failed";
-                  alert.style.display = "block";
-              }
-
             if (response.data.jwt !== undefined && response.data.jwt !== '') {
               this.$parent.$parent.login(loginUser.username, response.data.jwt);
             }
           }).catch(err => console.log(err));
+
+          alert.style.display = "block";
+
       },
       homeIfLoggedIn() {
         if(this.user.jwt !== undefined && this.user.jwt.length && this.user !== []) {
